@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); 
-const { cleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 //importing resources
 
@@ -18,13 +18,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
-        publicPath: "/"
+        publicPath: "/",
+        clean: true,
     }, //input and output files and directories
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            "@components": path.resolve(__dirname, './src/components/'),
-            "@styles": path.resolve(__dirname, './src/styles/')
+            "@components": path.resolve(__dirname, '.src/components/'),
+            "@styles": path.resolve(__dirname, '.src/styles/')
         }
     }, //extensions and alias to work with
     mode: 'production',
@@ -61,7 +62,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
-        new cleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ],
     devServer: {
         static: {
